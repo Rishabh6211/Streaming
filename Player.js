@@ -17,7 +17,16 @@ import RNBGD from './indexx';
 import {New} from './video/'
 import Video from 'react-native-video'
 const { width } = Dimensions.get("window");
-
+import {
+    RTCPeerConnection,
+    RTCIceCandidate,
+    RTCSessionDescription,
+    RTCView,
+    MediaStream,
+    MediaStreamTrack,
+    mediaDevices,
+    registerGlobals
+  } from 'react-native-webrtc';
 const styles = StyleSheet.create({
     container: {
         flex: 1
@@ -61,13 +70,13 @@ export default class Player extends Component {
     }
     componentDidMount() {
         console.log('path12345')
-        var path = RNBGD.directories.documents
+        var path = RNFS.LibraryDirectoryPath
         console.log('path123', path)
 
         RNFS.readDir(path) // On Android, use "RNFS.DocumentDirectoryPath" (MainBundlePath is not defined)
             .then((result) => {
-                console.log('GOT RESULT', result[0].path);
-                this.setState({ path: result[0].path })
+                console.log('GOT RESULT', result[4].path);
+                this.setState({ path: result[4].path })
 
                 // stat the first file
                 // return Promise.all([RNFS.stat(result[0].path), result[0].path]);
@@ -151,8 +160,8 @@ export default class Player extends Component {
 
 
                           
-                          {/* {this.state.path !='' && */}
-                           {/* <JWPlayer
+                          {this.state.path !='' &&
+                           <JWPlayer
                                 style={styles.player}
                                 playlistItem={{
                                     title: 'Track',                                 
@@ -162,7 +171,10 @@ export default class Player extends Component {
                                     // file: "https://content.jwplatform.com/manifests/vM7nH0Kl.m3u8",
                                 //   source:require('./video/new.mov'),
                                     // file: "file:///storage/emulated/0/Android/data/com.vodeoapp/files/chunklist_w79586375.m3u8",
-                                    file: `file://${this.state.path}/chunklist_w79586375.m3u8`,
+                                    // file: `file://${this.state.path}`,
+                                    file: 'file:///Users/rishabh/Desktop/POC/poc/video/chunklist_w79586375.m3u8',
+                                            // source={{uri:'file:///Users/rishabh/Desktop/POC/poc/video/chunklist_w79586375.m3u8'}}
+
                                     autostart: false,
                                     
                                 }}
@@ -176,16 +188,18 @@ export default class Player extends Component {
                                 nativeFullScreen={true} // when undefined or false you will need to handle the player styles in onFullScreen & onFullScreenExit callbacks
                                 onFullScreen={() => this.onFullScreen()}
                                 onFullScreenExit={() => this.onFullScreenExit()}
-                            /> */}
+                            />}
 
 
                         
 
         {/* <Video
+        controls
+        paused
         //   source={{uri:`https://content.jwplatform.com/manifests/vM7nH0Kl.m3u8`}}
-        source={{uri:'file:///Users/rishabh/Desktop/POC/poc/video/media_w79586375_1.ts'}}
+        // source={{uri:'file:///Users/rishabh/Desktop/POC/poc/video/chunklist_w79586375.m3u8'}}
         // source={{uri:'/Users/rishabh/Desktop/Screen Recording 2021-02-19 at 2.36.16 PM.mov'}}
-        // source={{uri:require('./video/chunklist_w79586375.m3u8')}}
+        source={require('./video/chunklist_w79586375.m3u8')}
           style={{ width: 350, height: 300 }}
           muted={true}
           repeat={true}
@@ -196,6 +210,7 @@ export default class Player extends Component {
           
 
         /> */}
+        {/* <RTCView streamURL={'https://content.jwplatform.com/manifests/vM7nH0Kl.m3u8'}/> */}
                     </View>
                 </View>
             </SafeAreaView>

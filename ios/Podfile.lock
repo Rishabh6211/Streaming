@@ -208,6 +208,8 @@ PODS:
     - react-native-video/Video (= 5.1.1)
   - react-native-video/Video (5.1.1):
     - React-Core
+  - react-native-webrtc (1.89.1):
+    - React-Core
   - react-native-webview (11.3.1):
     - React-Core
   - React-RCTActionSheet (0.63.4):
@@ -301,6 +303,7 @@ DEPENDENCIES:
   - react-native-jw-media-player (from `../node_modules/react-native-jw-media-player/ios`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-video (from `../node_modules/react-native-video`)
+  - react-native-webrtc (from `../node_modules/react-native-webrtc`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -364,6 +367,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/slider"
   react-native-video:
     :path: "../node_modules/react-native-video"
+  react-native-webrtc:
+    :path: "../node_modules/react-native-webrtc"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
@@ -420,6 +425,7 @@ SPEC CHECKSUMS:
   react-native-jw-media-player: 5841c971cb52239ff59026e048da32064338e9b7
   react-native-slider: e99fc201cefe81270fc9d81714a7a0f5e566b168
   react-native-video: 0bb76b6d6b77da3009611586c7dbf817b947f30e
+  react-native-webrtc: ccb0c21eb4fb04326648fbdb4a5d49977e2cf274
   react-native-webview: 07fca3f4378bd6ea26254bf63119bfd70f4fabeb
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b

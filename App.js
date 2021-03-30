@@ -212,11 +212,16 @@ export default class App extends Component {
     const id = testURL.split('/').pop();
     console.log('testUrl', id)
 
-    const filePath = `${RNBGD.directories.documents}/${id}`;
+    const filePath = `${RNFS.LibraryDirectoryPath}/${id}`;
+
+    // console.log('RNFS---',RNFS.LibraryDirectoryPath)
+    // console.log('RNFS---',RNFS.DocumentDirectoryPath)
+    
+    // return console.log('FilewPath',filePath)
 
   
     for (let i = 0; i < parsedManifest.segments.length; i++) {
-      let filePath1 = `${RNBGD.directories.documents}/${parsedManifest.segments[i].uri}`;
+      let filePath1 = `${RNFS.LibraryDirectoryPath}/${parsedManifest.segments[i].uri}`;
      
       // let filePath1 = `${RNFS.DocumentDirectoryPath}/${parsedManifest.segments[i].uri}`;
       console.log('-----filePath--1',filePath1)
@@ -291,3 +296,292 @@ export default class App extends Component {
     );
   }
 }
+
+// ----------------------------------------------------------------------------
+
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+
+// import React, {useEffect} from 'react';
+// import {
+//   SafeAreaView,
+//   StyleSheet,
+//   ScrollView,
+//   View,
+//   Text,
+//   StatusBar,
+//   Button,
+// } from 'react-native';
+
+// import {
+//   Header,
+//   LearnMoreLinks,
+//   Colors,
+//   DebugInstructions,
+//   ReloadInstructions,
+// } from 'react-native/Libraries/NewAppScreen';
+// import RNBackgroundDownloader from 'react-native-background-downloader';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// // import {QueryClient, QueryClientProvider, useQuery} from 'react-query';
+// import JWPlayer, {JWPlayerState} from 'react-native-jw-media-player';
+// import Player from './Player';
+
+// var task;
+// var idsToData = {};
+// // const queryClient = new QueryClient();
+
+// const storeData = async (downloadData) => {
+//   console.log('downData---', downloadData);
+//   try {
+//     const jsonValue = JSON.stringify(downloadData);
+//     console.log('jsona---', jsonValue);
+//     await AsyncStorage.setItem('data', jsonValue);
+//   } catch (e) {
+//     // saving error
+//   }
+// };
+
+// // function Download  () {
+
+// //   let id = Math.random()
+// //   .toString(36)
+// //   .substr(2, 6);
+
+// //   let url =  'http://212.183.159.230/200MB.zip';
+// //   let destination =  `${RNBackgroundDownloader.directories.documents}/file.zip`
+
+// //   let downloadData = {
+// //     id:id,
+// //     url:url,
+// //     destination:destination
+// //   }
+
+// //  storeData(downloadData)
+
+// //    task = RNBackgroundDownloader.download({
+// //     id: id,
+// //     url: url,
+// //     destination: destination
+
+// //   }).begin((expectedBytes) => {
+// // console.log(`${RNBackgroundDownloader.directories.documents}/file.zip`)
+
+// //     console.log(`Going to download ${expectedBytes} bytes!`);
+// //   }).progress((percent) => {
+// //     console.log(`Downloaded: ${percent * 100}%`);
+// //   }).done(() => {
+// //     console.log('Download is done!');
+// //   }).error((error) => {
+// //     console.log('Download canceled due to error: ', error);
+// //   });
+
+// // }
+// function saveDownloads() {
+//   AsyncStorage.setItem('idsToData', JSON.stringify(this.idsToData));
+// }
+
+// function Download() {
+//   const id = Math.random().toString(36).substr(2, 6);
+//   const filePath = `${RNBackgroundDownloader.directories.documents}/file.m3u8`;
+//   const url = 'https://content.jwplatform.com/manifests/vM7nH0Kl.m3u8';
+//   const task = RNBackgroundDownloader.download({
+//     id: id,
+//     url: url,
+//     destination: filePath,
+//   });
+//   let downloadData = {
+//     id: id,
+//     url: url,
+//     destination: filePath,
+//   };
+//   storeData(downloadData);
+//   attachToTask(task, filePath);
+//   idsToData[id] = {
+//     url,
+//     filePath,
+//   };
+
+//   console.log('data', idsToData);
+//   // saveDownloads();
+// }
+
+// function attachToTask(task, filePath) {
+//   console.log('here--------123', task);
+//   task.begin((expectedBytes) => {
+//       console.log(`Going to download ${expectedBytes} bytes!`);
+//     })
+//     .progress((percent) => {
+//       console.log(`Downloaded: ${percent * 100}%`);
+//     })
+//     .done(async () => {
+//       try {
+//         alert('done')
+//         console.log(`Finished downloading: ${task.id}, deleting it...`);
+//       } catch (e) {
+//         console.error(e);
+//       }
+
+//       // this.saveDownloads();
+//     })
+//     .error((err) => {
+//       console.error(`Download ${task.id} has an error: ${err}`);
+
+//       // this.saveDownloads();
+//     });
+// }
+// const playlistItem = {
+//   title: 'Track',
+//   mediaId: -1,
+//   image: 'http://image.com/image.png',
+//   desc: 'My beautiful track',
+//   time: 0,
+//   file: 'http://file.com/file.mp3',
+//   autostart: true,
+//   controls: true,
+//   repeat: false,
+//   displayDescription: true,
+//   displayTitle: true,
+//   tracks: [
+//     {
+//       file: 'http://file.com/english.vtt',
+//       label: 'en',
+//     },
+//     {
+//       file: 'http://file.com/spanish.srt',
+//       label: 'es',
+//     },
+//   ],
+// };
+
+// const getData = async () => {
+//   try {
+//     const jsonValue = await AsyncStorage.getItem('data');
+//     console.log('Data1234---', jsonValue);
+//     var Data = jsonValue != null ? JSON.parse(jsonValue) : null;
+//     console.log('Data----', Data);
+//     return jsonValue != null ? JSON.parse(jsonValue) : null;
+//   } catch (e) {
+//     // error reading value
+//   }
+// };
+
+// async function autoCall() {
+//   const tasks = await RNBackgroundDownloader.checkForExistingDownloads();
+//   console.log('task-----', tasks);
+//   if (tasks && tasks.length) {
+//     const downloadsData = {};
+//     const downloads = [];
+//     for (let task of tasks) {
+//       downloadsData[task.id] = {
+//         url: task.url,
+//         percent: task.percent,
+//         total: task.totalBytes,
+//         status: task.state === 'DOWNLOADING' ? 'downloading' : 'paused',
+//         task: task,
+//       };
+//       attachToTask(task, task.filePath);
+//     }
+//   }
+// }
+
+// function Example() {
+//   const {isLoading, error, data} = useQuery('repoData', () =>
+//     fetch(
+//       'https://api.github.com/repos/tannerlinsley/react-query',
+//     ).then((res) => res.json()),
+//   );
+
+//   console.log('data--', data, isLoading);
+
+//   // if (isLoading) return alert('loading')
+
+//   // if (error) return console.log('err')
+
+//   return (
+//     <View
+//       style={{
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignContent: 'center',
+//         alignItems: 'center',
+//       }}>
+//       <Text>{isLoading}</Text>
+//       <Text>Ram</Text>
+//     </View>
+//   );
+// }
+
+// const App = () => {
+//   useEffect(() => {
+//     // RNFFmpeg.execute('-i https://content.jwplatform.com/manifests/vM7nH0Kl.m3u8 -c:v mpeg4 file2.mp4').then(result => console.log(`FFmpeg process exited with rc=${result}.`));
+
+//     getData();
+//     autoCall();
+//   }, []);
+//   return (
+//     <>
+//       <StatusBar barStyle="dark-content" />
+//       <SafeAreaView>
+//         <ScrollView
+//           contentInsetAdjustmentBehavior="automatic"
+//           style={styles.scrollView}>
+//           <View style={styles.body}>
+//             <View style={styles.sectionContainer}>
+//               <Text style={styles.sectionTitle}>Pocs</Text>
+//               <Text style={styles.sectionDescription}></Text>
+//             </View>
+//             <Button title="Download" onPress={() => Download()} />
+//             <Button title="Pause" onPress={() => task.pause()} />
+//             <Button title="Resume" onPress={() => task.resume()} />
+//           </View>
+//         </ScrollView>
+//       </SafeAreaView>
+//     </>
+//   );
+// };
+
+// const styles = StyleSheet.create({
+//   scrollView: {
+//     backgroundColor: Colors.lighter,
+//   },
+//   engine: {
+//     position: 'absolute',
+//     right: 0,
+//   },
+//   body: {
+//     backgroundColor: Colors.white,
+//   },
+//   sectionContainer: {
+//     marginTop: 32,
+//     paddingHorizontal: 24,
+//   },
+//   sectionTitle: {
+//     fontSize: 24,
+//     fontWeight: '600',
+//     color: Colors.black,
+//   },
+//   sectionDescription: {
+//     marginTop: 8,
+//     fontSize: 18,
+//     fontWeight: '400',
+//     color: Colors.dark,
+//   },
+//   highlight: {
+//     fontWeight: '700',
+//   },
+//   footer: {
+//     color: Colors.dark,
+//     fontSize: 12,
+//     fontWeight: '600',
+//     padding: 4,
+//     paddingRight: 12,
+//     textAlign: 'right',
+//   },
+// });
+
+// export default App;
